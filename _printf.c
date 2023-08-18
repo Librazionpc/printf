@@ -31,8 +31,10 @@ int _printf(const char *format, ...)
 					print_char('%');
 					break;
 			}
+			i++;
 		}
 		else
 			print_char(format[i]);
 	}
+	return (i - 1);
 }
