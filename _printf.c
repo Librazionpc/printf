@@ -82,6 +82,7 @@ int _printf(const char *format, ...)
 			lenght++;
 		}
 	}
+	va_end(args);
 	if (buffer_index > 0)
 		write(1, buffer, buffer_index);
 

@@ -17,6 +17,8 @@ char *print_char(char c)
 	char *s; 
 
 	s = malloc(sizeof(char) * 2);
+	if (s == NULL)
+		return (0);
 	s[0] = c;
 	s[1] = '\0';
 	return (s);	
@@ -60,6 +62,8 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 			 lenght++;
 			}
 		string = malloc(sizeof(char) * (lenght + 1));
+		if (string == NULL)
+			return (NULL);
 		if (is_negative)
 		{
 			string[i] = '-';
