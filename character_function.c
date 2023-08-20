@@ -1,5 +1,6 @@
 #include "main.h"
 #include <unistd.h>
+#include <stdio.h>
 
 /**
  * print_char - Function that print char
@@ -28,10 +29,10 @@ int print_string(char *s)
 	int i;
 	int lenght = 0;
 
-	for (i = 0; s[i] == '\0'; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		write(1, &s[i], 1);
 		lenght++;
 	}
-	return (0);
+	write(1, s, lenght);
+	return (lenght);
 }
