@@ -37,6 +37,7 @@ int _printf(const char *format, ...)
 					lenght++;
 					break;
 			}
+			i++;
 		}
 		else
 		{
