@@ -24,6 +24,8 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
+			if (format[i + 1] != '\0')
+			{
 			switch (format[i + 1])
 			{
 				case 'c':
@@ -37,7 +39,15 @@ int _printf(const char *format, ...)
 					print_char('%');
 					lenght++;
 					break;
+				case 'd':
+					lenght += _int(va_arg(args, int));
+					break;
+				case 'i': 
+					lenght += = _int(va_arg(args, int));
 			}
+			}
+			else
+				print_char('%');
 			i++;
 		}
 		else
