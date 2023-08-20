@@ -43,7 +43,7 @@ int _printf(const char *format, ...)
 					lenght += _int(va_arg(args, int));
 					break;
 				case 'i': 
-					lenght += = _int(va_arg(args, int));
+					lenght +=  _int(va_arg(args, int));
 			}
 			}
 			else
