@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
 #include <stddef.h>
+#include <stdio.h>
 
 /**
  * _printf - Function that print to tandard.out

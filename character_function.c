@@ -12,6 +12,8 @@
 
 int print_char(char c)
 {
+	if (c == 0)
+		return (0);
 	write(1, &c, 1);
 	return (0);
 }
@@ -28,7 +30,9 @@ int print_string(char *s)
 {
 	int i;
 	int lenght = 0;
-
+	
+	if (s == NULL)
+		return (0);
 	for (i = 0; s[i] != '\0'; i++)
 	{
 		lenght++;
