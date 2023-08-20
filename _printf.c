@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+char buffer[BUFFER_SIZE];
+int buffer_index = 0;
+
 /**
  * _printf - Function that print to stdout
  *
@@ -11,14 +14,13 @@
  *
  * Return: The length of the string
  */
-
+int save_to_buffer(char *string);
+int handle_char(char s);
 int _printf(const char *format, ...)
 {
 	va_list args;
 	int i, j;
 	int lenght = 0;
-	char buffer[BUFFER_SIZE];
-	int buffer_index = 0;
 	char *string;
 
 	va_start(args, format);
@@ -49,41 +51,50 @@ int _printf(const char *format, ...)
 				case 'u':
 					string = print_unsigned_int(va_arg(args, unsigned int));
 			}
-			for (j = 0; string[j] != '\0'; j++)
-			{
-				if (buffer_index == BUFFER_SIZE)
-				{
-					write(1, buffer, buffer_index);
-					buffer_index = 0;
-				}
-				else
-				{
-					buffer[buffer_index] = string[j];
-					buffer_index++;
-				}
-				lenght++;
-			}
+				j = save_to_buffer(string);
+				lenght += j;
+				free(string);
+
 			if (format[i + 2] != '\0')
 				i++;
 		}
 		else
 		{
-			if (buffer_index == BUFFER_SIZE)
-			{
-				write(1, buffer, buffer_index);
-				buffer_index = 0;
-				buffer[buffer_index] = format[i];
-			}
-			else
-			{
-				buffer[buffer_index] = format[i];
-				buffer_index++;
-			}
+			handle_char(format[i]);
 			lenght++;
 		}
 	}
 	if (buffer_index > 0)
 		write(1, buffer, buffer_index);
 
+	return (lenght);
+}
+int handle_char(char c)
+{
+	char s[2];
+
+	s[0] = c;
+	s[1] = '\0';
+
+	return (save_to_buffer(s)); 
+}
+int save_to_buffer(char *string)
+{
+	int j;
+	int lenght = 0;
+	for (j = 0; string[j] != '\0'; j++)
+	{
+		if (buffer_index == BUFFER_SIZE)
+		{
+			write(1, buffer, buffer_index);
+			buffer_index = 0;
+		}
+		else
+		{
+			buffer[buffer_index] = string[j];
+			buffer_index++;
+		}
+		lenght++;
+	}
 	return (lenght);
 }
