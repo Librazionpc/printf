@@ -24,7 +24,7 @@ char *oct(int number)
 	return (string);
 }
 
-char *hex(int number, cap)
+char *hex(int number, char cap)
 {
 	char *string;
 
@@ -35,10 +35,23 @@ char *hex(int number, cap)
 	return (string);
 }
 
-char *_int(int number)
+char *print_unsigned_int(unsigned int number)
 {
 	char *string;
-
 	string = print_int(number, 10, 0);
+	return (string);
+}
+
+char *_int(int number)
+{
+	int _case = 0;
+	char *string;
+	if (number < 0)
+	{
+		number = -number;
+		_case = 2;
+	}
+
+	string = print_int(number, 10, _case);
 	return (string);
 }
