@@ -18,8 +18,9 @@ char *print_char(char c)
 	if (string == NULL)
 	{
 		free(string);
-		return (NULL);
 	}
+	if (string[0] == '\0')
+		return (" ");
 	string[0] = c;
 	string[1] = '\0';
 	return (string);
@@ -40,7 +41,7 @@ char *print_string(char *s)
 	int lenght = 0;
 
 	if (s == NULL)
-		return (NULL);
+		return (s = "(null)");
 	for (i = 0; s[i] != '\0'; i++)
 	{
 		lenght++;
