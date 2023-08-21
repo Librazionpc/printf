@@ -30,7 +30,10 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 			}
 		string = malloc(sizeof(char) * (lenght + 1));
 		if (string == NULL)
+		{
+			free(string);
 			return (NULL);
+		}
 		if (is_negative)
 		{
 			string[i] = '-';
@@ -60,7 +63,10 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 	{
 		string = malloc(sizeof(char) * (lenght + 1));
 		if (string == NULL)
+		{
+			free(string);
 			return (NULL);
+		}
 		if (num >= 10)
 			string[0] = handle_cap(_case, num);
 		else
