@@ -7,7 +7,7 @@
  *
  * Return: The lenght
  */
-int print_buffer(char *buffer, int *buffer_index, char *string)
+int print_buffer(char *buffer, unsigned int *buffer_index, char *string)
 {
 	int i;
 	int lenght = 0;
@@ -18,7 +18,7 @@ int print_buffer(char *buffer, int *buffer_index, char *string)
 			write(1, buffer, *buffer_index);
 			*buffer_index = 0;
 			buffer[*buffer_index] = string[i];
-			*buffer_index++; 
+			*buffer_index += 1; 
 		}
 		else
 		{
