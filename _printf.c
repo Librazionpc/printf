@@ -44,6 +44,19 @@ int _printf(const char *format, ...)
 					break;
 				case 'i': 
 					lenght +=  _int(va_arg(args, int));
+					break;
+				case 'u':
+					lenght += _unsigned_int(va_arg(args, int));
+					break;
+				case 'o':
+					lenght += oct_conversion(va_arg(args, int));
+					break;
+				case 'x':
+					lenght += hex_conversion(va_arg(args, int), 'x');
+					break;
+				case 'X':
+					lenght += hex_conversion(va_arg(args, int), 'X');
+					break;
 			}
 			}
 			else
