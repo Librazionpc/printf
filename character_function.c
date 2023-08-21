@@ -16,10 +16,7 @@ char *print_char(char c)
 
 	string = malloc(sizeof(char) * 2);
 	if (string == NULL)
-	{
-		free(string);
-		return (NULL);
-	}
+		return (0);
 	string[0] = c;
 	if (string[0] == '\0')
 		return (" ");
@@ -51,7 +48,7 @@ char *print_string(char *s)
 	if (string == NULL)
 	{
 		free(string);
-		return (NULL);
+		return (0);
 	}
 	for (i = 0; i < lenght; i++)
 	{

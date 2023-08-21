@@ -32,7 +32,7 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 		if (string == NULL)
 		{
 			free(string);
-			return (NULL);
+			return (0);
 		}
 		if (is_negative)
 		{
@@ -72,6 +72,8 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 		else
 			string[0] = num + '0';
 	}
+	if (string == NULL)
+		return (string = "(null)");
 	string[lenght] = '\0';
 	return (string);
 }
@@ -91,5 +93,7 @@ char handle_cap(int capital, int num)
 		s = (num - 10) + 'a';
 	else if (capital == 1)
 		s = (num - 10) + 'A';
+	if (s == '\0')
+		return (0);
 	return (s);
 }
