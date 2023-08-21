@@ -73,7 +73,11 @@ int _printf(const char *format, ...)
 			}
 			}
 			else
+			{
+				if (format[i + 1] == '\0')
+					break;
 				print_char('%');
+			}
 			}
 		else
 		{
