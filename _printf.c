@@ -30,42 +30,49 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 					print_char(va_arg(args, int));
-					lenght++;
+					lenght++; i++;
 					break;
 				case 's':
 					lenght += print_string(va_arg(args, char *));
+					i++;
 					break;
 				case '%':
 					print_char('%');
-					lenght++;
+					lenght++; i++;
 					break;
 				case 'd':
 					lenght += _int(va_arg(args, int));
+					i++;
 					break;
 				case 'i': 
 					lenght +=  _int(va_arg(args, int));
+					i++;
 					break;
 				case 'u':
 					lenght += _unsigned_int(va_arg(args, int));
+					i++;
 					break;
 				case 'o':
 					lenght += oct_conversion(va_arg(args, int));
+					i++;
 					break;
 				case 'x':
 					lenght += hex_conversion(va_arg(args, int), 'x');
+					i++;
 					break;
 				case 'X':
 					lenght += hex_conversion(va_arg(args, int), 'X');
+					i++;
 					break;
 				case 'b':
 					lenght += binary_conversion(va_arg(args, int));
+					i++;
 					break;
 			}
 			}
 			else
 				print_char('%');
-			i++;
-		}
+			}
 		else
 		{
 			print_char(format[i]);
