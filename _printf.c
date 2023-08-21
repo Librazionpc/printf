@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stddef.h>
 #include <stdio.h>
 
 /**
@@ -9,12 +7,37 @@
  *
  * Return: The lenght
  */
-
+int print_buffer(char *buffer, int *buffer_index, char *string)
+{
+	int i;
+	int lenght = 0;
+	for (i = 0; string[i] != '\0'; i++)
+	{
+		if (*buffer_index == BUFFER_SIZE)
+		{
+			write(1, buffer, *buffer_index);
+			*buffer_index = 0;
+			buffer[*buffer_index] = string[i];
+			*buffer_index++; 
+		}
+		else
+		{
+			buffer[*buffer_index] = string[i];
+			*buffer_index += 1;
+		}
+		lenght++;
+	}
+	free(string);
+	return (lenght);
+}
 int _printf(const char *format, ...)
 {
+	char buffer[BUFFER_SIZE];
+	unsigned int buffer_index = 0;
 	int i;
 	va_list args;
 	int lenght = 0;
+	char *string;
 
 	if (format == NULL)
 		return (-1);
@@ -29,43 +52,43 @@ int _printf(const char *format, ...)
 			switch (format[i + 1])
 			{
 				case 'c':
-					print_char(va_arg(args, int));
-					lenght++; i++;
+					string = print_char(va_arg(args, int));
+					i++;
 					break;
 				case 's':
-					lenght += print_string(va_arg(args, char *));
+					string = print_string(va_arg(args, char *));
 					i++;
 					break;
 				case '%':
-					print_char('%');
-					lenght++; i++;
+					string = print_char('%');
+					i++;
 					break;
 				case 'd':
-					lenght += _int(va_arg(args, int));
+					string = _int(va_arg(args, int));
 					i++;
 					break;
 				case 'i': 
-					lenght +=  _int(va_arg(args, int));
+					string =  _int(va_arg(args, int));
 					i++;
 					break;
 				case 'u':
-					lenght += _unsigned_int(va_arg(args, int));
+					string = _unsigned_int(va_arg(args, int));
 					i++;
 					break;
 				case 'o':
-					lenght += oct_conversion(va_arg(args, int));
+					string = oct_conversion(va_arg(args, int));
 					i++;
 					break;
 				case 'x':
-					lenght += hex_conversion(va_arg(args, int), 'x');
+					string = hex_conversion(va_arg(args, int), 'x');
 					i++;
 					break;
 				case 'X':
-					lenght += hex_conversion(va_arg(args, int), 'X');
+					string = hex_conversion(va_arg(args, int), 'X');
 					i++;
 					break;
 				case 'b':
-					lenght += binary_conversion(va_arg(args, int));
+					string = binary_conversion(va_arg(args, int));
 					i++;
 					break;
 			}
@@ -75,10 +98,12 @@ int _printf(const char *format, ...)
 			}
 		else
 		{
-			print_char(format[i]);
-			lenght++;
+			string = print_char(format[i]);
 		}
+		lenght += print_buffer(buffer, &buffer_index, string);
 	}
+	if (buffer_index > 0)
+		write(1, buffer, buffer_index);
 	va_end(args);
 	return (lenght);
 }

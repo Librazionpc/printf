@@ -10,10 +10,14 @@
  * Return: Always 0 (on sucess);
  */
 
-int print_char(char c)
+char *print_char(char c)
 {
-	write(1, &c, 1);
-	return (0);
+	char *string;
+
+	string = malloc(sizeof(char) * 2);
+	string[0] = c;
+	string[1] = '\0';
+	return (string);
 }
 
 /**
@@ -24,8 +28,9 @@ int print_char(char c)
  * Return: The string to stardard.out
  */
 
-int print_string(char *s)
+char *print_string(char *s)
 {
+	char *string;
 	int i;
 	int lenght = 0;
 
@@ -33,6 +38,13 @@ int print_string(char *s)
 	{
 		lenght++;
 	}
-	write(1, s, lenght);
-	return (lenght);
+	string = malloc(sizeof(char) *(lenght + 1));
+	if (string == NULL)
+		return (NULL);
+	for (i = 0; i < lenght; i++)
+	{
+		string[i] = s[i];
+	}
+	string[lenght] = '\0';
+	return (string);
 }
