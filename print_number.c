@@ -11,6 +11,8 @@ char *_int(int number)
 		_case = 2;
 	}
 	string = print_int(number, 10, _case);
+	if (string == NULL)
+		return (NULL);
 	return (string);
 }
 
@@ -19,6 +21,8 @@ char * _unsigned_int(unsigned int number)
 	char *string;
 
 	string = print_int(number, 10, 0);
+	if (string == NULL)
+		return (NULL);
 	return (string);
 }
 char *binary_conversion(unsigned int number)
@@ -26,6 +30,8 @@ char *binary_conversion(unsigned int number)
 	char *string;
 
 	string = print_int(number, 2, 0);
+	if (string == NULL)
+		return (NULL);
 	return (string);
 }
 char *oct_conversion(unsigned int number)
@@ -33,6 +39,8 @@ char *oct_conversion(unsigned int number)
 	char *string;
 
 	string = print_int(number, 8, 0);
+	if (string == NULL)
+		return (NULL);
 	return (string);
 }
 
@@ -44,5 +52,7 @@ char *hex_conversion(unsigned int number, char cap)
 	       string = print_int(number, 16, 0);
 	else if (cap == 'X')
 		string = print_int(number, 16, 1);
+	if (string == NULL)
+		return (NULL);
 	return (string);	
 }	
