@@ -19,8 +19,7 @@ int _printf(const char *format, ...)
 	char *string;
 
 	va_start(args, format);
-
-	if (format == NULL)
+	if (format == NULL || format == '\0')
 		return (-1);
 	for (i = 0; format[i] != '\0'; i++)
 	{
