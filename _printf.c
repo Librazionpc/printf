@@ -24,8 +24,6 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] != '\0')
-			{
 			switch (format[i + 1])
 			{
 				case 'c':
@@ -61,9 +59,6 @@ int _printf(const char *format, ...)
 					lenght += binary_conversion(va_arg(args, int));
 					break;
 			}
-			}
-			else
-				print_char('%');
 			i++;
 		}
 		else
