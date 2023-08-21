@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdlib.h>
 
 char handle_cap(int capital, int num);
 /**
