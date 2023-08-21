@@ -28,7 +28,16 @@ int _unsigned_int(unsigned int number)
 	free(string);
 	return (lenght);
 }
+int binary_conversion(unsigned int number)
+{
+	char *string;
+	unsigned int lenght;
 
+	string = print_int(number, 2, 0);
+	lenght = print_string(string);
+	free(string);
+	return (lenght);
+}
 int oct_conversion(unsigned int number)
 {
 	char *string;

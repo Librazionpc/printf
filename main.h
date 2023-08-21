@@ -9,4 +9,5 @@ int _int(int num);
 int _unsigned_int(unsigned int number);
 int oct_conversion(unsigned int number);
 int hex_conversion(unsigned int number, char cap);
+int binary_conversion(unsigned int number);
 #endif

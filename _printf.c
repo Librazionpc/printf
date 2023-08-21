@@ -57,6 +57,9 @@ int _printf(const char *format, ...)
 				case 'X':
 					lenght += hex_conversion(va_arg(args, int), 'X');
 					break;
+				case 'b':
+					lenght += binary_conversion(va_arg(args, int));
+					break;
 			}
 			}
 			else
