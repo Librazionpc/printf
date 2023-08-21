@@ -63,7 +63,7 @@ int _printf(const char *format, ...)
 			}
 			}
 			else
-				return (lenght);
+				print_char('%');
 			i++;
 		}
 		else
