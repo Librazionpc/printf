@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "main.h"
 #include <unistd.h>
 #include <stdio.h>
@@ -16,7 +17,10 @@ char *print_char(char c)
 
 	string = malloc(sizeof(char) * 2);
 	if (string == NULL)
+	{
+		free(string);
 		return (0);
+	}
 	string[0] = c;
 	if (string[0] == '\0')
 		return (" ");

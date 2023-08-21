@@ -89,6 +89,8 @@ char handle_cap(int capital, int num)
 {
 	char s;
 
+	if (num == 0)
+		return (-1);
 	if (capital == 0)
 		s = (num - 10) + 'a';
 	else if (capital == 1)
