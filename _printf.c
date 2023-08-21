@@ -75,7 +75,8 @@ int _printf(const char *format, ...)
 			{
 				if (format[i + 1] == '\0')
 					break;
-				print_char('%');
+				print_char(va_arg(args, int));
+				i++;
 			}
 			}
 		else
