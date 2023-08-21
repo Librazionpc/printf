@@ -40,7 +40,7 @@ char *print_string(char *s)
 	{
 		lenght++;
 	}
-	string = malloc(sizeof(char) *(lenght + 1));
+	string = malloc(sizeof(char) * (lenght + 1));
 	if (string == NULL || s == NULL)
 		return (NULL);
 	for (i = 0; i < lenght; i++)
