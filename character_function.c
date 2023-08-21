@@ -16,7 +16,7 @@ char *print_char(char c)
 	if (string == NULL)
 	{
 		free(string);
-		return (0);
+		return (NULL);
 	}
 	string[0] = c;
 	if (string[0] == '\0')
@@ -49,7 +49,7 @@ char *print_string(char *s)
 	if (string == NULL)
 	{
 		free(string);
-		return (0);
+		return (NULL);
 	}
 	for (i = 0; i < lenght; i++)
 	{
