@@ -1,100 +1,104 @@
-#include <stdarg.h>
 #include "main.h"
-#include <unistd.h>
-#include <stdlib.h>
 #include <stdio.h>
 
-char buffer[BUFFER_SIZE];
-int buffer_index = 0;
-
-/**
- * _printf - Function that print to stdout
- *
- * @format: Fetches the argument
- *
- * Return: The length of the string
- */
-int save_to_buffer(char *string);
-int handle_char(char s);
+int print_buffer(char *buffer, int *buffer_index, char *string)
+{
+	int i;
+	int lenght = 0;
+	for (i = 0; string[i] != '\0'; i++)
+	{
+		if (*buffer_index == BUFFER_SIZE)
+		{
+			write(1, buffer, *buffer_index);
+			*buffer_index = 0;
+			buffer[*buffer_index] = string[i];
+			*buffer_index++; 
+		}
+		else
+		{
+			buffer[*buffer_index] = string[i];
+			*buffer_index += 1;
+		}
+		lenght++;
+	}
+	free(string);
+	return (lenght);
+}
 int _printf(const char *format, ...)
 {
+	char buffer[BUFFER_SIZE];
+	unsigned int buffer_index = 0;
+	int i;
 	va_list args;
-	int i, j;
 	int lenght = 0;
 	char *string;
+
+	if (format == NULL)
+		return (-1);
 
 	va_start(args, format);
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
+			if (format[i + 1] != '\0')
+			{
 			switch (format[i + 1])
 			{
-				case 'd':
-					string = _int(va_arg(args, int)); break;
-				case 'i':
-					string = _int(va_arg(args, int)); break;
-				case 'o':
-					string = oct(va_arg(args, unsigned int)); break;
-				case 'x':
-					string = hex(va_arg(args, unsigned int), 'x'); break;
-				case 'X':
-					string = hex(va_arg(args, unsigned int), 'X'); break;
-				case 'b':
-					string = binary(va_arg(args, unsigned int)); break;
 				case 'c':
-					string = print_char(va_arg(args, int)); break;
+					string = print_char(va_arg(args, int));
+					i++;
+					break;
 				case 's':
-					string = print_string(va_arg(args, char *)); break;
+					string = print_string(va_arg(args, char *));
+					i++;
+					break;
 				case '%':
-					string = print_char('%'); break;
+					string = print_char('%');
+					i++;
+					break;
+				case 'd':
+					string = _int(va_arg(args, int));
+					i++;
+					break;
+				case 'i': 
+					string =  _int(va_arg(args, int));
+					i++;
+					break;
 				case 'u':
-					string = print_unsigned_int(va_arg(args, unsigned int));
+					string = _unsigned_int(va_arg(args, int));
+					i++;
+					break;
+				case 'o':
+					string = oct_conversion(va_arg(args, int));
+					i++;
+					break;
+				case 'x':
+					string = hex_conversion(va_arg(args, int), 'x');
+					i++;
+					break;
+				case 'X':
+					string = hex_conversion(va_arg(args, int), 'X');
+					i++;
+					break;
+				case 'b':
+					string = binary_conversion(va_arg(args, int));
+					i++;
+					break;
 			}
-				j = save_to_buffer(string);
-				lenght += j;
-				free(string);
-
-			if (format[i + 2] != '\0')
+			}
+			else
 				i++;
+
 		}
 		else
 		{
-			handle_char(format[i]);
-			lenght++;
+			string = print_char(format[i]);
 		}
+		lenght += print_buffer(buffer, &buffer_index, string);
 	}
 	if (buffer_index > 0)
 		write(1, buffer, buffer_index);
-
-	return (lenght);
-}
-int handle_char(char c)
-{
-	char s[2];
-
-	s[0] = c;
-	s[1] = '\0';
-
-	return (save_to_buffer(s)); 
-}
-int save_to_buffer(char *string)
-{
-	int j;
-	int lenght = 0;
-	for (j = 0; string[j] != '\0'; j++)
-	{
-		if (buffer_index == BUFFER_SIZE)
-		{
-			write(1, buffer, buffer_index);
-			buffer_index = 0;
-		}
-		else
-		{
-			buffer[buffer_index] = string[j];
-			buffer_index++;
-		}
-		lenght++;
-	}
+	va_end(args);
 	return (lenght);
 }
