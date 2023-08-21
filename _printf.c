@@ -33,7 +33,7 @@ int _printf(const char *format, ...)
 					lenght++;
 					break;
 				case 's':
-					lenght += print_string(va_arg(args, char *));
+					lenght += print_string(va_arg(args, char *)); 
 					break;
 				case '%':
 					print_char('%');
