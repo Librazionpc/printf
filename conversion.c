@@ -16,8 +16,6 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 	unsigned int mul = 1, remainder = 0, lenght = 1, i = 0, is_negative = 0;
 	char character;
 
-	if (num == 0 || base == 0)
-		return (0);
 	if (_case == 2)
 	{
 		is_negative = 1;
@@ -90,13 +88,9 @@ char handle_cap(int capital, int num)
 {
 	char s;
 
-	if (num == 0)
-		return (-1);
 	if (capital == 0)
 		s = (num - 10) + 'a';
 	else if (capital == 1)
 		s = (num - 10) + 'A';
-	if (s == '\0')
-		return (0);
 	return (s);
 }
