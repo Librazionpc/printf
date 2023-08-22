@@ -15,12 +15,9 @@ char *print_char(char c)
 	string = malloc(sizeof(char) * 2);
 	if (string == NULL)
 	{
-		free(string);
 		return (NULL);
 	}
 	string[0] = c;
-	if (string[0] == '\0')
-		return (" ");
 	string[1] = '\0';
 	return (string);
 }

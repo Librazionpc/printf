@@ -15,8 +15,8 @@ char *get_string(char spec, int value)
 {
 	char *string;
 
-	if (spec == 'c' && value == 0)
-		return (NULL);
+	//if (spec == 'c' && value == 0)
+	//	return (NULL);
 	if (spec == 'c')
 	{
 		string = print_char(value);
