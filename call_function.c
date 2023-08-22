@@ -18,7 +18,9 @@ char *get_string(char spec, int value)
 	if (spec == 'c' && value == 0)
 		return (NULL);
 	if (spec == 'c')
+	{
 		string = print_char(value);
+	}
 	else if (spec == 'd' || spec == 'i')
 		string = _int(value);
 	else if (spec == 'x' || spec == 'X')

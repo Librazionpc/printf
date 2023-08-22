@@ -57,4 +57,5 @@ char *print_string(char *s)
 	}
 	string[lenght] = '\0';
 	return (string);
+	
 }

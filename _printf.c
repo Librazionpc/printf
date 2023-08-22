@@ -25,18 +25,17 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			spec = format[i + 1];
+			i++;
+			spec = format[i];
 			if (spec == 's')
 			{
 				string = get_string_str(va_arg(args, char *));
-				i++;
 			}
 			else if (spec == 'c' || spec == 'u' || spec == 'i' || spec == 'd'
 					|| spec == 'o' || spec == 'x' || spec == 'X' || spec == 'b'
 					|| spec == '%')
 			{
 				string = get_string(spec, va_arg(args, int));
-				i++;
 			}
 			else
 			       return (-1);	
