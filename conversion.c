@@ -32,8 +32,7 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 		string = malloc(sizeof(char) * (lenght + 1));
 		if (string == NULL)
 		{
-			free(string);
-			return (0);
+			return (NULL);
 		}
 		if (is_negative)
 		{
@@ -65,7 +64,6 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 		string = malloc(sizeof(char) * (lenght + 1));
 		if (string == NULL)
 		{
-			free(string);
 			return (NULL);
 		}
 		if (num >= 10)

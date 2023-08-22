@@ -15,7 +15,6 @@ char *print_char(char c)
 	string = malloc(sizeof(char) * 2);
 	if (string == NULL)
 	{
-		free(string);
 		return (NULL);
 	}
 	string[0] = c;
@@ -45,10 +44,10 @@ char *print_string(char *s)
 	{
 		lenght++;
 	}
+	printf("%d\n", lenght);
 	string = malloc(sizeof(char) * (lenght + 1));
 	if (string == NULL)
 	{
-		free(string);
 		return (NULL);
 	}
 	for (i = 0; i < lenght; i++)
