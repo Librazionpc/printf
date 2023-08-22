@@ -16,12 +16,26 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 	unsigned int mul = 1, remainder = 0, lenght = 1, i = 0, is_negative = 0;
 	char character;
 
-	if (num == 0 || base == 0)
-		return (0);
 	if (_case == 2)
 	{
 		is_negative = 1;
 		lenght++;
+	}
+
+	while ((num / mul) >= base)
+	{
+		mul *= base;
+		 lenght++;
+	}
+	string = malloc(sizeof(char) * (lenght + 1));
+	if (string == NULL)
+	{
+		return (0);
+	}
+	if (is_negative)
+	{
+		string[i] = '-';
+		i++;
 	}
 	if (num >= base)
 	{
@@ -67,9 +81,9 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 			return (NULL);
 		}
 		if (num >= 10)
-			string[0] = handle_cap(_case, num);
+			string[i] = handle_cap(_case, num);
 		else
-			string[0] = num + '0';
+			string[i] = num + '0';
 	}
 	if (string == NULL)
 		return (string = "(null)");
@@ -88,13 +102,9 @@ char handle_cap(int capital, int num)
 {
 	char s;
 
-	if (num == 0)
-		return (-1);
 	if (capital == 0)
 		s = (num - 10) + 'a';
 	else if (capital == 1)
 		s = (num - 10) + 'A';
-	if (s == '\0')
-		return (0);
 	return (s);
 }

@@ -11,7 +11,7 @@ int print_buffer(char *buffer, unsigned int *buffer_index, char *string);
 
 int _printf(const char *format, ...)
 {
-	char buffer[BUFFER_SIZE];
+	char buffer[BUFFER_SIZE], spec;
 	unsigned int buffer_index = 0;
 	int i;
 	va_list args;
@@ -25,59 +25,30 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1] != '\0')
+			i++;
+			spec = format[i];
+			if (spec == '%')
+				string = print_char('%');
+			else if (spec == 's')
 			{
-			switch (format[i + 1])
+				string = get_string_str(va_arg(args, char *));
+			}
+			else if (spec == 'c' || spec == 'u' || spec == 'i' || spec == 'd'
+					|| spec == 'o' || spec == 'x' || spec == 'X' || spec == 'b')
 			{
-				case 'c':
-					string = print_char(va_arg(args, int));
-					i++;
-					break;
-				case 's':
-					string = print_string(va_arg(args, char *));
-					i++;
-					break;
-				case '%':
-					string = print_char('%');
-					i++;
-					break;
-				case 'd':
-					string = _int(va_arg(args, int));
-					i++;
-					break;
-				case 'i':
-					string =  _int(va_arg(args, int));
-					i++;
-					break;
-				case 'u':
-					string = _unsigned_int(va_arg(args, int));
-					i++;
-					break;
-				case 'o':
-					string = oct_conversion(va_arg(args, int));
-					i++;
-					break;
-				case 'x':
-					string = hex_conversion(va_arg(args, int), 'x');
-					i++;
-					break;
-				case 'X':
-					string = hex_conversion(va_arg(args, int), 'X');
-					i++;
-					break;
-				case 'b':
-					string = binary_conversion(va_arg(args, int));
-					i++;
-					break;
+				string = get_string(spec, va_arg(args, int));
 			}
-			}
+			else if (spec != '%')
+				string = print_char(spec);
 			else
-				print_char('%');
-			}
+					return (-1);
+		}
 		else
 		{
 			string = print_char(format[i]);
 		}
+		if (string == NULL)
+			return (-1);
 		lenght += print_buffer(buffer, &buffer_index, string);
 	}
 	if (buffer_index > 0)
@@ -101,8 +72,6 @@ int print_buffer(char *buffer, unsigned int *buffer_index, char *string)
 	int i;
 	int lenght = 0;
 
-	if (buffer == NULL || string == NULL)
-		return (-1);
 	for (i = 0; string[i] != '\0'; i++)
 	{
 		if (*buffer_index == BUFFER_SIZE)

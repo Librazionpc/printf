@@ -18,8 +18,6 @@ char *print_char(char c)
 		return (NULL);
 	}
 	string[0] = c;
-	if (string[0] == '\0')
-		return (" ");
 	string[1] = '\0';
 	return (string);
 }
@@ -44,7 +42,6 @@ char *print_string(char *s)
 	{
 		lenght++;
 	}
-	printf("%d\n", lenght);
 	string = malloc(sizeof(char) * (lenght + 1));
 	if (string == NULL)
 	{
@@ -56,4 +53,5 @@ char *print_string(char *s)
 	}
 	string[lenght] = '\0';
 	return (string);
+
 }
