@@ -2,12 +2,11 @@
 
 /**
  * get_string_str - Funtion that call the print function
- *
+ * @spec: the format specifier
  * @value: Fetches the string
  *
  * Return: The string
  */
-
 
 char *get_string_str(char *value, char spec)
 {

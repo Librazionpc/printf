@@ -53,9 +53,6 @@ char *print_string(char *s)
 	}
 	string[lenght] = '\0';
 	return (string);
-<<<<<<< HEAD
-
-=======
 }
 
 /**
@@ -107,5 +104,4 @@ char *print_string_(char *s)
 	}
 	string[j] = '\0';
 	return (string);
->>>>>>> 29afbf4 (wrote a custom conversion specifier for my _printf function)
 }
