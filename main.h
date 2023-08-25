@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #define BUFFER_SIZE 1024
 
 int _printf(const char *format, ...);
@@ -16,5 +17,7 @@ char *oct_conversion(unsigned int number);
 char *hex_conversion(unsigned int number, char cap);
 char *binary_conversion(unsigned int number);
 char *get_string(char spec, int value);
-char *get_string_str(char *value);
+char *get_string_str(char *value, char spec);
+char *print_string_(char *s);
+
 #endif

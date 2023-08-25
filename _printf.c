@@ -27,9 +27,11 @@ int _printf(const char *format, ...)
 		{
 			i++;
 			spec = format[i];
-			if (spec == 's')
+			if (spec == '\0')
+				break;
+			if (spec == 's' || spec == 'S')
 			{
-				string = get_string_str(va_arg(args, char *));
+				string = get_string_str(va_arg(args, char *), spec);
 			}
 			else if (spec == 'c' || spec == 'u' || spec == 'i' || spec == 'd'
 					|| spec == 'o' || spec == 'x' || spec == 'X' || spec == 'b'
@@ -38,7 +40,7 @@ int _printf(const char *format, ...)
 				string = get_string(spec, va_arg(args, int));
 			}
 			else
-			       return (-1);	
+				return (-1);				
 		}
 		else
 		{

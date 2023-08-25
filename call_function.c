@@ -1,13 +1,16 @@
 #include "main.h"
 
 
-char *get_string_str(char *value)
+char *get_string_str(char *value, char spec)
 {
 	char *string;
 
 	if (value == NULL)
 		return (NULL);
-	string = print_string(value);
+	if (spec == 's')
+		string = print_string(value);
+	else if (spec == 'S')
+		string = print_string_(value);
 	return (string);
 }
 
