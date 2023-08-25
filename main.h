@@ -1,10 +1,10 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef _MAIN_H_
+#define _MAIN_H_
 #include <stdarg.h>
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #define BUFFER_SIZE 1024
 
 int _printf(const char *format, ...);
@@ -16,4 +16,8 @@ char *_unsigned_int(unsigned int number);
 char *oct_conversion(unsigned int number);
 char *hex_conversion(unsigned int number, char cap);
 char *binary_conversion(unsigned int number);
+char *get_string(char spec, int value);
+char *get_string_str(char *value, char spec);
+char *print_string_(char *s);
+
 #endif

@@ -1,10 +1,15 @@
 #include "main.h"
-#include <stdlib.h>
 
+char handle_cap(int capital, int num);
+/**
+ * print_int - function that convert integers
+ * @base: Fetches the argument base of the to coverted to
+ * @_case: Fetches if it uppercase or lowercase
+ * @num: fetches the integer to converted
+ *
+ * Return: The int has covert string
+ */
 
-
-
-char handle_cap(int, int);
 char *print_int(unsigned int num, unsigned int base, int _case)
 {
 	char *string;
@@ -16,24 +21,28 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 		is_negative = 1;
 		lenght++;
 	}
+
+	while ((num / mul) >= base)
+	{
+		mul *= base;
+		 lenght++;
+	}
+	string = malloc(sizeof(char) * (lenght + 1));
+	if (string == NULL)
+	{
+		return (0);
+	}
+	if (is_negative)
+	{
+		string[i] = '-';
+		i++;
+	}
 	if (num >= base)
 	{
-		while ((num / mul) >= base)
-			{mul *= base;
-			 lenght++;
-			}
-		string = malloc(sizeof(char) * (lenght + 1));
-		if (string == NULL)
-			return (NULL);
-		if (is_negative)
-		{
-			string[i] = '-';
-			i++;
-		}
 		if ((num / mul) >= 10)
 			character = handle_cap(_case, (num / mul));
 		else
-		       character = (num / mul) + '0';	
+			character = (num / mul) + '0';
 		string[i] = character;
 		i++;
 		while (mul >= base)
@@ -47,19 +56,20 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 			else
 				character = remainder + '0';
 			string[i]  = character;
-		       	i++;
+			i++;
 		}
 	}
 	else
 	{
-		string = malloc(sizeof(char) * (lenght + 1));
 		if (num >= 10)
-			 string[0] = handle_cap(_case, num);
-                else
-                        string[0] = num + '0';
-        }
-        string[lenght] = '\0';
-        return (string);
+			string[i] = handle_cap(_case, num);
+		else
+			string[i] = num + '0';
+	}
+	if (string == NULL)
+		return (string = "(null)");
+	string[lenght] = '\0';
+	return (string);
 }
 /**
  * handle_cap - handle capital conversion for hexadecimal
@@ -71,13 +81,11 @@ char *print_int(unsigned int num, unsigned int base, int _case)
 
 char handle_cap(int capital, int num)
 {
-        char s;
+	char s;
 
-        if (capital == 0)
-                s = (num - 10) + 'a';
-        else if (capital == 1)
-                s = (num - 10) + 'A';
-        return (s);
+	if (capital == 0)
+		s = (num - 10) + 'a';
+	else if (capital == 1)
+		s = (num - 10) + 'A';
+	return (s);
 }
-
-
